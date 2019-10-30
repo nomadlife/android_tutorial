@@ -1,3 +1,13 @@
 implementaion:
 implementation 'com.android.support:design:28.0.0'
 
+main layout:
+RelativeLayout>CoordinatorLayout>(AppBarLayout>(Toolbar>TextView+TabLayout)+FrameLayout)
+
+RelativeLayout
+  CoordinatorLayout
+    AppBarLayout
+      Toolbar
+        TextView
+      TabLayout
+    FrameLayout
