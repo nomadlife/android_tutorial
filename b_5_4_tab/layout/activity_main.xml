@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <androidx.appcompat.widget.Toolbar
+            <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,9 +29,9 @@
                     android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
                     android:text="타이틀"/>
 
-            </androidx.appcompat.widget.Toolbar>
+            </android.support.v7.widget.Toolbar>
 
-            <com.google.android.material.tabs.TabLayout
+            <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:background="@android:color/background_light"/>
 
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
