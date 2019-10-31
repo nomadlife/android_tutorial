@@ -1,0 +1,9 @@
+gradle:app
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io'}
+    }
+}
+
+implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
