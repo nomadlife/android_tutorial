@@ -1,12 +1,12 @@
 package com.example.test_b_recyclerview;
 
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.person_item, viewGroup, false);
 
@@ -23,15 +23,19 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Person item = items.get(position);
         viewHolder.setItem(item);
     }
 
     @Override
     public int getItemCount() {
+
         return items.size();
     }
+
+
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
@@ -53,11 +57,21 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     }
 
     public void addItem(Person item) {
+
         items.add(item);
     }
 
     public void setItems(ArrayList<Person> items) {
+
         this.items = items;
+    }
+
+    public Person getItem(int position) {
+        return items.get(position);
+    }
+
+    public void setItem(int position, Person item) {
+        items.set(position, item);
     }
 
 }
