@@ -1,0 +1,1 @@
+![image](test_b_recyclerview_2.png)
