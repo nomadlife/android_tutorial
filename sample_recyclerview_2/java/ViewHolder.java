@@ -3,8 +3,7 @@ package com.example.test_recyclerview_2;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder{
     ImageView imageView;
