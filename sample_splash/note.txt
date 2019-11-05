@@ -1,0 +1,1 @@
+don't forget setting up splash theme on manifest
