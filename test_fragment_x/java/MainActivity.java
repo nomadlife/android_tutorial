@@ -19,13 +19,13 @@ protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
-        fragment1 = (Fragment1) manager.findFragmentById(R.id.fragment1);
-        fragment2 = (Fragment2) manager.findFragmentById(R.id.fragment2);
+        fragment1 = (Fragment1) manager.findFragmentById(R.id.list_fragment);
+        fragment2 = (Fragment2) manager.findFragmentById(R.id.viewer_fragment);
 
         }
 
 @Override
 public void onImageSelected(int position) {
-        viewerFragment.setImage(images[position]);
+        fragment2.setImage(images[position]);
         }
 }
