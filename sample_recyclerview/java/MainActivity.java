@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         VerticalAdapter verticalAdapter = new VerticalAdapter(this, allMovieList);
 
         view.setHasFixedSize(true);
-        view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        view.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         view.setAdapter(verticalAdapter);
     }
 
