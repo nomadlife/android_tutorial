@@ -1,5 +1,6 @@
 package com.example.test_viewpager;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,14 @@ public class ImageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
         ImageView imageView = view.findViewById(R.id.imageView);
+
+
+        // round edge
+        GradientDrawable drawable = (GradientDrawable) getActivity().getDrawable(R.drawable.image_rounding);
+        imageView.setBackground(drawable);
+        imageView.setClipToOutline(true);
+
+
 
 
 

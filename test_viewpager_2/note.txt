@@ -1,0 +1,2 @@
+add viewpager margin / multiple pictures, fix fragment loop
+add round edge to ImageView
