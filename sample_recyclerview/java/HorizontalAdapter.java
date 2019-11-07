@@ -6,8 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Ho
                 .from(viewGroup.getContext())
                 .inflate(R.layout.recyclerview_horizontal, null);
 
-        return new HorizontalAdapter.HorizontalViewHolder(v);
+        return new HorizontalViewHolder(v);
     }
 
     @Override

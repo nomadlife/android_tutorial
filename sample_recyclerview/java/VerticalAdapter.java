@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
     @Override
     public VerticalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_vertical, null);
-        return new VerticalAdapter.VerticalViewHolder(v);
+        return new VerticalViewHolder(v);
     }
 
     @Override
