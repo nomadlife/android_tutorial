@@ -1,11 +1,13 @@
 package com.example.test_firebase_x;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,67 +15,139 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.test_firebase_x.Model.Movie;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
     private DatabaseReference moviesRef;
-
+    private ArrayList<Movie> dataList;
     RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        moviesRef =  FirebaseDatabase.getInstance().getReference().child("Movies");
-
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
 
-        
-        
+
+        moviesRef = FirebaseDatabase.getInstance().getReference().child("Movies");
+        moviesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                dataList = new ArrayList<>();
+
+                Log.d("datalist", "snapshot count - " + dataSnapshot.getChildrenCount());
+
+                for (DataSnapshot movieSnapshot: dataSnapshot.getChildren()) {
+
+                    Movie movie = new Movie();
+                    movie.setMovieTitle(movieSnapshot.child("title").getValue().toString());
+                    movie.setImageResourceURL(movieSnapshot.child("image").getValue().toString());
+                    movie.setMovieGrade(movieSnapshot.child("grade").getValue().toString());
+
+                    Log.d("datalist","dataList count - " + movie);
+                    dataList.add(movie);
+                }
+                Log.d("datalist","dataList count - " + dataList.size());
+                recyclerView.setAdapter(new MyAdapter(dataList));  // Adapter 등록
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+//        this.InitializeData();
+//        this.InitializeData0();
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseRecyclerOptions<Movie> options = new FirebaseRecyclerOptions.Builder<Movie>()
-                .setQuery(moviesRef, Movie.class)
-                .build();
-
-        FirebaseRecyclerAdapter<Movie, ViewHolder> adapter = new FirebaseRecyclerAdapter<Movie, ViewHolder>(options) {
+    private void InitializeData0() {
+        moviesRef.addChildEventListener(new ChildEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull ViewHolder viewHolder, int i, @NonNull Movie movie) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                viewHolder.title.setText(movie.getMovieTitle());
-                viewHolder.grade.setText(movie.getMovieGrade());
-                Picasso.get().load(movie.getImageResourceID()).into(viewHolder.imageView);
+                Log.d("datalist", "snapshot - " + dataSnapshot.getKey());
+
+                Object object = dataSnapshot.getValue(Object.class);
+                Log.d("datalist","Object - " + object.toString());
+
+                Movie movie = new Movie();
+                dataList.add(movie);
+
+                recyclerView.setAdapter(new MyAdapter(dataList));  // Adapter 등록
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
 
-            @NonNull
             @Override
-            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_layout, parent, false);
-                ViewHolder holder = new ViewHolder(view);
-                return holder;
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
             }
-        };
 
-        recyclerView.setAdapter(adapter);  // Adapter 등록
-        adapter.startListening();
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
-    private void temp(){
+    private void InitializeData() {
 
     }
+
+
+    private void InitializeData2() {
+
+        FirebaseDatabase movies = FirebaseDatabase.getInstance().getReference().child("Movies").getDatabase();
+
+        Log.d("init2,getkey", "" + movies);
+
+        Movie movie = new Movie();
+        dataList.add(movie);
+
+    }
+
+    private void InitializeData3() {
+
+        dataList.add(new Movie(R.drawable.movie1, "어벤져스", "15"));
+        dataList.add(new Movie(R.drawable.movie2, "미션임파서블","15"));
+        dataList.add(new Movie(R.drawable.movie3, "아저씨", "18"));
+    }
+
+
+
+
+
+
+
 }

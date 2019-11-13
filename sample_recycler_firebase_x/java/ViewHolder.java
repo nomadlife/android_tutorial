@@ -1,22 +1,26 @@
 package com.example.test_firebase_x;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder{
     ImageView imageView;
-    TextView title;
-    TextView grade;
+    TextView titleView;
+    TextView gradeView;
+
 
     ViewHolder(View itemView)
     {
         super(itemView);
 
-        imageView = itemView.findViewById(R.id.imageView2);
-        title = itemView.findViewById(R.id.title);
-        grade = itemView.findViewById(R.id.grade);
+        imageView = itemView.findViewById(R.id.imageView);
+        titleView = itemView.findViewById(R.id.titleView);
+        gradeView = itemView.findViewById(R.id.gradeView);
+
     }
 }
