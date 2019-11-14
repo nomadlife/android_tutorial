@@ -2,9 +2,6 @@ package com.example.test_firebase_x;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,19 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_firebase_x.Model.Movie;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
@@ -68,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     dataList.add(movie);
                 }
                 Log.d("datalist","dataList count - " + dataList.size());
-                recyclerView.setAdapter(new MyAdapter(dataList));  // Adapter 등록
+                recyclerView.setAdapter(new MyAdapter(getApplicationContext(), dataList));  // Adapter 등록
             }
 
             @Override
@@ -95,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 Movie movie = new Movie();
                 dataList.add(movie);
 
-                recyclerView.setAdapter(new MyAdapter(dataList));  // Adapter 등록
+                recyclerView.setAdapter(new MyAdapter(getApplicationContext(), dataList));  // Adapter 등록
             }
 
             @Override

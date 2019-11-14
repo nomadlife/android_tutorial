@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,14 +13,15 @@ import com.example.test_firebase_x.Model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private ArrayList<Movie> myDataList;
+    private Context mContext;
 
-    MyAdapter(ArrayList<Movie> dataList)
+    MyAdapter(Context context, ArrayList<Movie> dataList)
     {
+        mContext = context;
         myDataList = dataList;
         Log.d("datalist","onAdapter - count - " + myDataList.size());
 
@@ -38,10 +40,8 @@ public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position)
+    public void onBindViewHolder(ViewHolder viewHolder, final int position)
     {
-//        Boolean testBoolean = ( myDataList.get(position).getImageResourceURL() == null );
-//        Log.d("datalist","test logic - "+testBoolean);
 
         if (myDataList.get(position).getImageResourceURL() != null) {
             Picasso.get().load(myDataList.get(position).getImageResourceURL()).into(viewHolder.imageView);
@@ -52,12 +52,21 @@ public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
         viewHolder.titleView.setText(myDataList.get(position).getMovieTitle());
         viewHolder.gradeView.setText(myDataList.get(position).getMovieGrade());
 
+        viewHolder.cvItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("click","test message - " + position);
+                Toast.makeText(mContext, "test mesage!!! " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount()
     {
-        //Adapter가 관리하는 전체 데이터 개수 반환
         return myDataList.size();
     }
+
+
 }
