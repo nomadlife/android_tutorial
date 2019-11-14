@@ -1,2 +1,4 @@
 try to merge tab,viewpager,fragment
 on debugging...
+
+1. viewpager : when tab switch, page duplicated. and lost currentposition
